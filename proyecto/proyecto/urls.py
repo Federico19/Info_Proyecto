@@ -28,4 +28,19 @@ urlpatterns = [
 
     #REGISTRO
     path('Usuario/',include('apps.usuarios.urls')),
+
+    # Inicio path('Inicio/', views.Home, name='inicio'),
+    
+    # Quienes Somos
+    path('QuienesSomos/', views.QuienesSomos, name='quienesSomos'),
+    
+    # Contacto
+    path('Contacto/', views.Contacto, name='contacto'),
+
+    #Publicaciones
+    path('Publicaciones/', include('apps.publicaciones.urls')),
+
+    #Recursos
+    path('Recursos/', include('apps.recursos.urls')),
+
 ]
