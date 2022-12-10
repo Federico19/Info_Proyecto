@@ -8,4 +8,4 @@ class Registro(CreateView):
   #Formulario Django
   form_class = RegistroForm
   success_url = reverse_lazy('login')
-  tempalte_name = 'usuarios/registro.html'
+  template_name = 'usuarios/registro.html'
