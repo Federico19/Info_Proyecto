@@ -7,17 +7,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
   <title></title>
 </head>
 <body>
+  <br>
 
     <div  style="text-align:center ;"> 
         <img
-        src="n.jpg"
-        width="150px" height="160px" alt="">
+        src="{% static 'img/n.jpg' %}"
+        width="400px" height="170px" alt="" >
+    
+       <br>
+       
+       <br>
+        <h3>La escucha, la cercanía y el conocimiento son claves para el desarrollo. Desde el 10 de marzo de 2003 generando oportunidades, trabajando por la autosuficiencia de las personas.</h3>
     </div>
-
 </body>
 </html>
 
-  {% endblock %}
+  {% endblock %}                                             
