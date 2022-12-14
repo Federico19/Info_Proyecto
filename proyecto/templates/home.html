@@ -1,1 +1,166 @@
 {% extends "base.html" %}
+{% block tituloBarraNavegacion %} Home {% endblock %}
+
+{% block seccion %}  
+      <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
+        <a href="{% url 'home' %}" class="navbar-brand ps-5 me-0">
+            <h1 class="text-white m-0">A.C. Juntos en Acción</h1> 
+        </a>
+        <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{% url 'home' %}" class="nav-item nav-link active">Inicio</a>
+                <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
+                <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link">Publicaciones</a>
+                <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
+                <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+            </div>        
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-primary px-3 d-none d-lg-block">LOGOUT</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary px-3 d-none d-lg-block">LOGIN</a>
+            <br>
+            <a href="{% url 'usuarios:registro' %}" class="btn btn-primary px-3 d-none d-lg-block">REGISTRARSE</a>
+        {% endif %}
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+<hr size="5px" color="#FF5E14" />
+  <h1>Inicio</h1>
+<hr size="5px" color="#FF5E14" />
+  <br>
+  <br>
+<center>
+<img src="static/img/Imagen4.gif">
+</center>
+
+<br><br>
+
+
+<!--QUIENES SOMOS-->
+
+
+  <section class="mapa">
+              <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
+                <h3 class="titulo-principal text-center">ASOCIACIÓN CIVIL JUNTOS EN ACCIÓN</h3>
+              </div>
+  </section>
+  <br>
+  <br>
+   <section style="margin-left: 8%;"> 
+    <ul>
+  <h3>Presentación de la Organización:</h3>
+  <br>
+
+<h5>Autoridades:</h5><br>
+<div style="margin-left: 40px;">
+  
+
+
+<li type="disc">Presidente: Silva, Sandra</li>
+<br>
+<li type="disc">Tesorera: Zarco, Gisela</li>
+<br>
+<li type="disc">Vocales: Valenzuela, Lisa y Duca, Silvia</li>
+<br>
+<li type="disc">Revisores de cuenta: Hernandez, Soledad y Secoff Alicia</li>
+<br>
+</div>
+<h5>Objetivos:</h5>
+
+<div style="margin-left: 40px;">
+
+
+<br>
+<li type="disc">Apoyo, contención y asesoramiento, propiciando el involucramiento de las familias y la sensibilización de la comunidad.</li>
+<br>
+<li type="disc">Creación de espacios priorizando actividades dentro de la recreación y capacitación laboral.</li>
+<br>
+<li type="disc">Capacitar y luego lograr la inserción laboral, entre otros fines (la asociación creo la UEGP N°143 Centro de Formación Integral para Personas con Discapacidad para alcanzar las metas planteadas, se viene trabajando a través de ella hace 10 años y se continúa).
+</li>
+<br>
+</div>
+<h5>Misión y Visión:</h5>
+
+<div style="margin-left: 40px;">
+
+
+<br>
+<li type="disc">Para los que formamos Juntos en Acción las personas con discapacidad son titulares de los mismos derechos fundamentales que el resto de los ciudadanos. Creemos en una concepción donde las personas con discapacidad poseen facultad para decidir sobre sus propias vidas, mientras su discapacidad no impida esto, en oposición a una concepción paternalista como la que rige aun en estos tiempos. las personas con discapacidad reclaman la igualdad de oportunidades y es nuestro deber ayudarlos a que lo puedan lograr.</li>
+<br>
+
+</div>
+</p>
+</ul>
+
+</section>
+
+
+<!--CONTACTO-->
+
+
+  <section class="mapa">
+              <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
+                <h3 class="titulo-principal text-center">NUESTRA UBICACIÓN</h3>
+<br><br>
+              </div>
+              <center>
+              <div class="mapa-contenido">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.6857508041726!2d-60.44882758539435!3d-26.78628528318223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94412ce3c68bc62f%3A0x8c842a33abd51d5a!2sDorrego%20490%2C%20H3700IAJ%20S%C3%A1enz%20Pe%C3%B1a%2C%20Chaco!5e0!3m2!1ses-419!2sar!4v1670891699835!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div> 
+</center>
+  </section>
+  <br>
+  <br>
+   <section style="margin-left: 8%;"> 
+    <ul>
+  <h3>Información de contacto</h3>
+  <br>
+
+<h5>Dirección de correo electrónico: </h5><br>
+<div style="margin-left: 40px;">
+  
+
+
+<li type="disc">Correo de la UEP: uep143.sp.chaco@gmail.com</li>
+<br>
+<li type="disc">Correo de la Presidente: sandraccpa@hotmail.com</li>
+  <br>
+</div>
+<h5>Números de teléfonos:</h5>
+
+<div style="margin-left: 40px;">
+
+
+<br>
+<li type="disc">N° de la UEP: 3644733177</li>
+<br>
+<li type="disc">N° de la Presidente: 3644673583</li>
+<br>
+</div>
+</p>
+</ul>
+
+</section>
+
+<section style="margin-left: 10%;">
+<h5>Redes Sociales</h5><br>
+<a style="color: #3b5998;" href="https://www.facebook.com/people/Asociacion-Civil-Juntos-En-Accion/100064567493574/" role="button"
+  ><i class="fab fa-facebook-f fa-lg"></i p>     Asociación Civil Juntos En Acción</p>
+</a>
+<br>
+<a style="color: #3b5998;" href="https://m.facebook.com/people/UEP-N%C2%BA-143-CENTRO-DE-FORMACION-INTEGRAL/100063611561590/" role="button"
+  ><i class="fab fa-facebook-f fa-lg"></i p>     UEP Nº 143 CENTRO DE FORMACIÓN INTEGRAL</p>
+</a>
+
+</section>
+
+
+
+  <br><br>
+<hr size="5px" color="#FF5E14" />
+  {% endblock %}

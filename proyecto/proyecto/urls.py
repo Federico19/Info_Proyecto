@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth
 from . import views
+#URL LOGIN
+from django.contrib.auth import views as auth
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/',admin.site.urls),
@@ -27,7 +30,7 @@ urlpatterns = [
 	path('logout/',auth.LogoutView.as_view(),name='logout'),
 
     #REGISTRO
-    path('Usuario/',include('apps.usuarios.urls')),
+    path('Usuarios/', include('apps.usuarios.urls')),
 
     # Inicio path('Inicio/', views.Home, name='inicio'),
     
@@ -42,5 +45,5 @@ urlpatterns = [
 
     #Recursos
     path('Recursos/', include('apps.recursos.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-]
