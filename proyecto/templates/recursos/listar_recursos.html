@@ -15,7 +15,7 @@
                 <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
                 <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
                 <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link">Publicaciones</a>
-                <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
+                <a href="{% url 'recursos:listar' %}" class="nav-item nav-link active">Recursos</a>
                 <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
             </div>        
             {% if user.is_authenticated %}
