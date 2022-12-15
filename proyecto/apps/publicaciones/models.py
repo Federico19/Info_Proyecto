@@ -18,3 +18,13 @@ class Publicacion(models.Model):
 
   def __str__(self):
     return self.titulo
+
+class Comentario(models.Model):
+
+  publicacion = models.ForeignKey(Publicacion, related_name="comentarios", on_delete = models.CASCADE)
+  nombre = models.CharField(max_length=255)
+  cuerpo = models.TextField()
+  fecha = models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return '%s - %s' % (self.publicacion.titulo, self.nombre)
