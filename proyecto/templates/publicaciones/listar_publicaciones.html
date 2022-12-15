@@ -37,22 +37,21 @@
   <br>
   <center>
     <!--Filtro categoria-->
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
+    <div>
+    
 
-    <!--Filtro categoria-->
-    <div> 
+    <div class="dropdown">
+      <button type="button" class="btn btn-secondary dropdown-toggle" id="simpleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar por Categoría
+      </button>
+
+      <ul class="dropdown-menu">
+        
         {% for cat in categoria %} 
-            <a href="?id={{cat.pk}}">{{cat.nombre}}</a>
+            <li><a href="?id={{cat.pk}}" class="dropdown-item">{{cat.nombre}}</a></li>
         {% endfor %}
+      </ul>
+
     </div>
 
 
