@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Publicacion, Comentario
+from .models import Publicacion, Comentario, Categoria
 from .forms import FormularioComentario
 from django.core.paginator import Paginator
 from django.views.generic import CreateView
@@ -11,15 +11,23 @@ from django.shortcuts import redirect
 
 def Listar_Publicaciones(request):
     contexto = {}
+    cat = Categoria.objects.all().order_by('nombre')
+    id_categoria = request.GET.get('id', None)
+    if id_categoria:
+      publicaciones = Publicacion.objects.filter (categoria_publicacion = id_categoria) #Filtra
+    else:
+      publicaciones = Publicacion.objects.all() #RETORNA LISTA DE OBJETOS
+    
 
-    publicaciones = Publicacion.objects.all() #RETORNA LISTA DE OBJETOS
-
-    paginator = Paginator(publicaciones, 1)
+    paginator = Paginator(publicaciones, 6)
     pagina = request.GET.get('page')
     publicaciones = paginator.get_page(pagina)
+    
+    
 
     contexto={
-      'publicaciones': publicaciones
+      'publicaciones': publicaciones,
+      'categoria' : cat
     }
 
 

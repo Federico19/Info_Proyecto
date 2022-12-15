@@ -36,6 +36,25 @@
   <br>
   <br>
   <center>
+    <!--Filtro categoria-->
+    <div>
+    
+
+    <div class="dropdown">
+      <button type="button" class="btn btn-secondary dropdown-toggle" id="simpleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar por Categoría
+      </button>
+
+      <ul class="dropdown-menu">
+        
+        {% for cat in categoria %} 
+            <li><a href="?id={{cat.pk}}" class="dropdown-item">{{cat.nombre}}</a></li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+
   <h3>LISTA DE PUBLICACIONES</h3>
 <br><br>
 <div>
