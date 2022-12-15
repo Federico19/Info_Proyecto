@@ -54,16 +54,20 @@
 <h3>Comentarios</h3>
 
 {% if not publicacion.comentarios.all %}
-     Todavia no hay comentarios... <br><a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">
-     Agregar uno</a>
+    Todavia no hay comentarios... 
+    <br>
+    <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar uno</a>
 {% else %}
-     {% for comentario in publicacion.comentarios.all %}
-         <strong>
-         {{ comentario.nombre }} -
-         {{ comentario.fecha }}
-         </strong>
-         <br>
-         {{ comentario.cuerpo }}
+    <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar Comentario</a>
+    <br><br>
+    {% for comentario in publicacion.comentarios.all %}
+        <strong>
+            {{ comentario.nombre }} -
+            {{ comentario.fecha }}
+        </strong>
+        <br>
+        {{ comentario.cuerpo }}
+        <br><br>
     {% endfor %}
 {% endif %}
 </section>
@@ -73,4 +77,5 @@
 </center>
 <br><br>
 <hr size="5px" color="#FF5E14" />
-  {% endblock seccion %}
+
+{% endblock seccion %}

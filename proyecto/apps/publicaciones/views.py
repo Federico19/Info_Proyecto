@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 # Create your views here.
 
-@login_required
+
 def Listar_Publicaciones(request):
     contexto = {}
 
@@ -35,7 +35,7 @@ def Listar_Publicaciones(request):
 
     return render(request, 'publicaciones/listar_publicaciones.html', contexto)
 
-@login_required
+
 def Detalle_Publicaciones(request, pk):
     contexto = {}
 
@@ -46,6 +46,7 @@ def Detalle_Publicaciones(request, pk):
 
     return render(request, 'publicaciones/detalle.html', contexto)
 
+@login_required
 def Agregar_Comentario(request, pk):
   
   if request.method == 'POST':
@@ -56,7 +57,7 @@ def Agregar_Comentario(request, pk):
       comentario.nombre = request.user
       comentario.cuerpo = request.POST.get('cuerpo')
       comentario.save()
-      #return redirect('detalle', pk = pk)
+      return redirect('publicaciones:detalle', pk = pk)
   else:
     form = FormularioComentario()
 
