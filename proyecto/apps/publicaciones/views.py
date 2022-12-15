@@ -1,8 +1,7 @@
 from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
-
 from .models import Publicacion
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -10,9 +9,15 @@ from .models import Publicacion
 def Listar_Publicaciones(request):
     contexto = {}
 
-    n = Publicacion.objects.all() #RETORNA LISTA DE OBJETOS
+    publicaciones = Publicacion.objects.all() #RETORNA LISTA DE OBJETOS
 
-    contexto['publicaciones'] = n
+    paginator = Paginator(publicaciones, 1)
+    pagina = request.GET.get('page')
+    publicaciones = paginator.get_page(pagina)
+
+    contexto={
+      'publicaciones': publicaciones
+    }
 
 
     #n = Publicacion.objects.all()
@@ -31,7 +36,9 @@ def Listar_Publicaciones(request):
 def Detalle_Publicaciones(request, pk):
     contexto = {}
 
-    n = Publicacion.objects.get(pk = pk) #RETORNA SOLO UN OBJETO
-    contexto['publicacion'] = n
+    publicacion = Publicacion.objects.get(pk = pk) #RETORNA SOLO UN OBJETO
+    contexto={
+      'publicacion': publicacion
+    }
 
     return render(request, 'publicaciones/detalle.html', contexto)

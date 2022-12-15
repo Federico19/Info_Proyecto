@@ -51,10 +51,10 @@
 </div>
 <br><br>
 <section style="margin-left: 8%;margin-right: 8%;">
-<h3>Comentarios:</h3>
+<h3>Comentarios</h3>
 
 {% if not publicacion.comentarios.all %}
-     Todavia no hay comentarios...<a href="#">
+     Todavia no hay comentarios... <br><a href="#">
      Agregar uno</a>
 {% else %}
      {% for comentario in publicacion.comentarios.all %}
@@ -69,8 +69,8 @@
 </section>
 <br><br>
 <center>
-        <a href="{% url 'publicaciones:listar_publicaciones' %}">VOLVER</a>
-    </center>
+    <a href="{% url 'publicaciones:listar_publicaciones' %}">VOLVER</a>
+</center>
 <br><br>
 <hr size="5px" color="#FF5E14" />
   {% endblock seccion %}
