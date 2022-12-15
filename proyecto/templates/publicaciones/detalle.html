@@ -54,7 +54,7 @@
 <h3>Comentarios</h3>
 
 {% if not publicacion.comentarios.all %}
-     Todavia no hay comentarios... <br><a href="#">
+     Todavia no hay comentarios... <br><a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">
      Agregar uno</a>
 {% else %}
      {% for comentario in publicacion.comentarios.all %}

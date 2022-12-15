@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Publicacion
+from .models import Publicacion, Comentario
+from .forms import FormularioComentario
 from django.core.paginator import Paginator
+from django.views.generic import CreateView
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -42,3 +45,20 @@ def Detalle_Publicaciones(request, pk):
     }
 
     return render(request, 'publicaciones/detalle.html', contexto)
+
+def Agregar_Comentario(request, pk):
+  
+  if request.method == 'POST':
+    form = FormularioComentario(request.POST)
+    if form.is_valid():
+      comentario = form.save(commit = False)
+      comentario.publicacion = Publicacion.objects.get(pk = pk)
+      comentario.nombre = request.user
+      comentario.cuerpo = request.POST.get('cuerpo')
+      comentario.save()
+      #return redirect('detalle', pk = pk)
+  else:
+    form = FormularioComentario()
+
+  return render(request, 'publicaciones/agregar_comentario.html', {'form' : form})
+
