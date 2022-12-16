@@ -45,5 +45,7 @@ urlpatterns = [
 
     #Recursos
     path('Recursos/', include('apps.recursos.urls')),
+
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

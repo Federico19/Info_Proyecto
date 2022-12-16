@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class Recurso(models.Model):
+  nombre = models.CharField(max_length=150)
+  archivo = models.FileField(blank=True, null=True)

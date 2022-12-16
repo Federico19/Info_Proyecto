@@ -10,17 +10,16 @@
 {% endblock %}
 
 {% block seccion %}  
+<h1>Recursos</h1>
+<br>
+  {% for recurso in recursos %}
+    <h2>{{ recurso.nombre }}</h2>
+    {{ recurso.archivo }}
+    
+    <form method="POST" action="{% url 'recursos:listar' %}">{% csrf_token %}
+			<input type="text" name="id_recurso" value="{{recurso.pk}}" hidden=""> 
+			<input type="submit" value="Descargar">
+		</form>
 
-    <hr size="5px" color="#FF5E14" />
-    <h1>Recursos</h1>
-    <hr size="5px" color="#FF5E14" />
-    <br>
-    <br>
-    <center>
-    <h3>LISTA DE RECURSOS</h3>
-    <br><br>
-    </center>
-    <br><br>
-    <hr size="5px" color="#FF5E14" />
-
+  {% endfor %}
 {% endblock seccion %}
