@@ -2,80 +2,61 @@
 {% load static %}
 {% block tituloBarraNavegacion %} Detalle de Publicación {% endblock %}
 
-{% block seccion %}  
-      <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
-        <a href="{% url 'home' %}" class="navbar-brand ps-5 me-0">
-            <h1 class="text-white m-0">A.C. Juntos en Acción</h1> 
-        </a>
-        <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
-                <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
-                <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link active">Publicaciones</a>
-                <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
-                <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
-            </div>        
-            {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="btn btn-primary px-3 d-none d-lg-block">LOGOUT</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="btn btn-primary px-3 d-none d-lg-block">LOGIN</a>
-            <br>
-            <a href="{% url 'usuarios:registro' %}" class="btn btn-primary px-3 d-none d-lg-block">REGISTRARSE</a>
-        {% endif %}
-        </div>
-    </nav>
-    <!-- Navbar End -->
+{% block navbar %}
+    <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
+    <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
+    <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link active">Publicaciones</a>
+    <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
+    <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+{% endblock %}
 
-<hr size="5px" color="#FF5E14" />
-  <h1>Detalle de Publicación</h1>
-<hr size="5px" color="#FF5E14" />
-  <br>
-  <br>
-<center>
-<div>
-    
-    <img src="{{publicacion.imagen.url}}" width="500" height="500">
-</center>
-<br><br>
-        <section style="margin-left: 8%;margin-right: 8%;"> 
-        <p><strong>TITULO: {{publicacion.titulo}}</strong></p>
-        <p><strong>FECHA: {{publicacion.fecha}}</strong></p>
-        <p><strong>CATEGORIA: {{publicacion.categoria_publicacion}}</strong></p>
-        <p>{{publicacion.cuerpo}}</p>
+
+{% block seccion %}  
+
+    <hr size="5px" color="#FF5E14" />
+        <h1>Detalle de Publicación</h1>
+    <hr size="5px" color="#FF5E14" />
+        <br><br>
+        <center>
+            <div>
+                <img src="{{publicacion.imagen.url}}" width="500" height="500">
+                <br><br>
+                <section style="margin-left: 8%;margin-right: 8%;"> 
+                    <p><strong>TITULO: {{publicacion.titulo}}</strong></p>
+                    <p><strong>FECHA: {{publicacion.fecha}}</strong></p>
+                    <p><strong>CATEGORIA: {{publicacion.categoria_publicacion}}</strong></p>
+                    <p>{{publicacion.cuerpo}}</p>
+                </section>
+                <br><br>
+            </div>
+        </center>
+        <br><br>
+
+        <section style="margin-left: 8%;margin-right: 8%;">
+            <h3>Comentarios</h3>
+            {% if not publicacion.comentarios.all %}
+                Todavia no hay comentarios... 
+                <br>
+                <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar uno</a>
+            {% else %}
+                <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar Comentario</a>
+                <br><br>
+                {% for comentario in publicacion.comentarios.all %}
+                    <strong>
+                        {{ comentario.nombre }} -
+                        {{ comentario.fecha }}
+                    </strong>
+                    <br>
+                    {{ comentario.cuerpo }}
+                    <br><br>
+                {% endfor %}
+            {% endif %}
         </section>
         <br><br>
-</div>
-<br><br>
-<section style="margin-left: 8%;margin-right: 8%;">
-<h3>Comentarios</h3>
-
-{% if not publicacion.comentarios.all %}
-    Todavia no hay comentarios... 
-    <br>
-    <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar uno</a>
-{% else %}
-    <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar Comentario</a>
-    <br><br>
-    {% for comentario in publicacion.comentarios.all %}
-        <strong>
-            {{ comentario.nombre }} -
-            {{ comentario.fecha }}
-        </strong>
-        <br>
-        {{ comentario.cuerpo }}
+        <center>
+            <a href="{% url 'publicaciones:listar_publicaciones' %}">VOLVER</a>
+        </center>
         <br><br>
-    {% endfor %}
-{% endif %}
-</section>
-<br><br>
-<center>
-    <a href="{% url 'publicaciones:listar_publicaciones' %}">VOLVER</a>
-</center>
-<br><br>
-<hr size="5px" color="#FF5E14" />
+    <hr size="5px" color="#FF5E14" />
 
 {% endblock seccion %}
