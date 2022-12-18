@@ -37,9 +37,22 @@
             {% if not publicacion.comentarios.all %}
                 Todavia no hay comentarios... 
                 <br>
-                <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar uno</a>
-            {% else %}
-                <a href="{% url 'publicaciones:agregar_comentario' publicacion.pk %}">Agregar Comentario</a>
+            {% endif %}
+
+            <form method="POST" action="{% url 'publicaciones:comentar' %}">{% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" name="comentario" rows="3"></textarea>
+                </div>
+                <input type="text" name="id_publicacion" value="{{publicacion.pk}}" hidden="">
+                <br> 
+                {% if user.is_authenticated %}
+                    <input class="btn btn-primary mb-2" type="submit" value="Comentar">
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary mb-2">Loguerse para Comentar</a>
+                {% endif%}
+            </form>
+
+            {% if publicacion.comentarios.all %}
                 <br><br>
                 {% for comentario in publicacion.comentarios.all %}
                     <strong>

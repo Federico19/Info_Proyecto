@@ -1,10 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Publicacion, Comentario, Categoria
-from .forms import FormularioComentario
 from django.core.paginator import Paginator
-from django.views.generic import CreateView
-from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -55,19 +53,11 @@ def Detalle_Publicaciones(request, pk):
     return render(request, 'publicaciones/detalle.html', contexto)
 
 @login_required
-def Agregar_Comentario(request, pk):
-  
-  if request.method == 'POST':
-    form = FormularioComentario(request.POST)
-    if form.is_valid():
-      comentario = form.save(commit = False)
-      comentario.publicacion = Publicacion.objects.get(pk = pk)
-      comentario.nombre = request.user
-      comentario.cuerpo = request.POST.get('cuerpo')
-      comentario.save()
-      return redirect('publicaciones:detalle', pk = pk)
-  else:
-    form = FormularioComentario()
+def Comentar(request):
+  id_publicacion = request.POST.get('id_publicacion', None)
+  publi = Publicacion.objects.get(pk = id_publicacion)
+  cuerpo_comentario = request.POST.get('comentario', None)
+  nombre_usuario = request.user.username
+  comentario = Comentario.objects.create(publicacion = publi, nombre = nombre_usuario, cuerpo = cuerpo_comentario)
 
-  return render(request, 'publicaciones/agregar_comentario.html', {'form' : form})
-
+  return redirect(reverse_lazy('publicaciones:detalle', kwargs={'pk': id_publicacion}))
