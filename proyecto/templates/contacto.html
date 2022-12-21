@@ -2,24 +2,21 @@
 {% block tituloBarraNavegacion %} Contacto {% endblock %}
 
 {% block navbar %}
-  <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
-  <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
-  <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link">Publicaciones</a>
-  <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
-  <a href="{% url 'contacto' %}" class="nav-item nav-link active">Contacto</a>
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+
 {% endblock %}
 
 {% block seccion %}
-    
-  <hr size="5px" color="#FF5E14" />
-  <h1>Contacto</h1>
-  <hr size="5px" color="#FF5E14" />
-  <br><br>
-
+<div class="container-sm p-5"> 
   <section class="mapa">
 
     <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
-      <h3 class="titulo-principal text-center">NUESTRA UBICACIÓN</h3>
+      <h3 class="titulo-principal text-center text-orange">NUESTRA UBICACIÓN</h3>
     <br><br>
 
     </div>
@@ -32,48 +29,47 @@
   </section>
   <br><br>
 
-  <section style="margin-left: 8%;"> 
+  <section> 
 
     <ul>
       <h3>Información de contacto</h3>
       <br>
-      <h5>Dirección de correo electrónico: </h5><br>
+      <h5>Dirección de correo electrónico: </h5>
 
-      <div style="margin-left: 40px;">
+      <div class="container-sm px-5">
         <li type="disc">Correo de la UEP: uep143.sp.chaco@gmail.com</li>
         <br>
         <li type="disc">Correo de la Presidente: sandraccpa@hotmail.com</li>
         <br>
       </div>
+
       <h5>Números de teléfonos:</h5>
 
-      <div style="margin-left: 40px;">
-        <br>
+      <div class="container-sm px-5">
         <li type="disc">N° de la UEP: 3644733177</li>
         <br>
         <li type="disc">N° de la Presidente: 3644673583</li>
         <br>
       </div>
-      </p>
     </ul>
-
-</section>
-
-  <section style="margin-left: 10%;">
-    
-    <h5>Redes Sociales</h5><br>
-    <a style="color: #3b5998;" href="https://www.facebook.com/people/Asociacion-Civil-Juntos-En-Accion/100064567493574/" role="button"
-      ><i class="fab fa-facebook-f fa-lg"></i p>  Asociación Civil Juntos En Acción</p>
-    </a>
-    <br>
-    <a style="color: #3b5998;" href="https://m.facebook.com/people/UEP-N%C2%BA-143-CENTRO-DE-FORMACION-INTEGRAL/100063611561590/" role="button"
-      ><i class="fab fa-facebook-f fa-lg"></i p>  UEP Nº 143 CENTRO DE FORMACIÓN INTEGRAL</p>
-    </a>
-
   </section>
 
-  </a> 
-  <br><br>
-  <hr size="5px" color="#FF5E14" />
+  <section>
+    <ul>
+    <h5>Redes Sociales</h5>
+    <div class="container-sm px-5" >
+      
+      <a style="color: #3b5998;" href="https://www.facebook.com/people/Asociacion-Civil-Juntos-En-Accion/100064567493574/" role="button"
+        ><i class="fab fa-facebook-f fa-lg"></i p>  Asociación Civil Juntos En Acción</p>
+      </a>
+      <a style="color: #3b5998;" href="https://m.facebook.com/people/UEP-N%C2%BA-143-CENTRO-DE-FORMACION-INTEGRAL/100063611561590/" role="button"
+        ><i class="fab fa-facebook-f fa-lg"></i p>  UEP Nº 143 CENTRO DE FORMACIÓN INTEGRAL</p>
+      </a>
+    </div>
+  </ul>
+  </section>
 
+
+
+</div>
  {% endblock %}

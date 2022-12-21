@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Publicacion, Comentario, Categoria
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
+import datetime
 
 # Create your views here.
 
@@ -10,18 +11,36 @@ from django.urls import reverse_lazy
 def Listar_Publicaciones(request):
     contexto = {}
     cat = Categoria.objects.all().order_by('nombre')
+
+    #Filtro por categoria
     id_categoria = request.GET.get('id', None)
+
     if id_categoria:
       publicaciones = Publicacion.objects.filter (categoria_publicacion = id_categoria) #Filtra
     else:
       publicaciones = Publicacion.objects.all() #RETORNA LISTA DE OBJETOS
-    
 
-    paginator = Paginator(publicaciones, 6)
+
+    #Filtro por fecha de publicacion
+    fecha_publicacion = request.GET.get('fecha', None)
+        
+    publi_fecha = []
+    if fecha_publicacion:
+      publicaciones = Publicacion.objects.all()
+      print(type(publicaciones))
+      for publi in publicaciones:
+        if str(publi.fecha.date()) == fecha_publicacion:
+          print('Funka pa')
+          publi_fecha.append(publi)
+     
+      publicaciones = publi_fecha
+
+
+    #Define los elementos para la paginacion
+    paginator = Paginator(publicaciones, 2)
     pagina = request.GET.get('page')
     publicaciones = paginator.get_page(pagina)
-    
-    
+
 
     contexto={
       'publicaciones': publicaciones,

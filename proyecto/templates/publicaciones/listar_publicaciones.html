@@ -3,79 +3,101 @@
 {% block tituloBarraNavegacion %} Publicaciones {% endblock %}
 
 {% block navbar %}
-    <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
-    <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
-    <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link active">Publicaciones</a>
-    <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
-    <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+
 {% endblock %}
 
 
 {% block seccion %}  
+    <!-- Filtros -->
+    <div id="Filtros" class="container-sm px-5">
+        <div class="row my-3 ">
+            <!-- Filtro por fecha -->
+            <div>
+                <form method="GET" action="{% url 'publicaciones:listar_publicaciones' %}">{% csrf_token %}
+                    <button class="btn bg-orange2 text-white p-1" value="submit">Filtrar por Fecha</button>
+                    <input required value="submit" type="date" name="fecha" min="2022-12-14" pattern="\d{4}-\d{2}-\d{2}">    
+                </form>
+            </div>
 
-    <hr size="5px" color="#FF5E14" />
-        <h1>Publicaciones</h1>
-    <hr size="5px" color="#FF5E14" />
-    
-    <br><br>
-    <center>
-
-        <!--Filtro categoria-->
-        <div class="dropdown">
-            <button type="button" class="btn btn-secondary dropdown-toggle" id="simpleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrar por Categoría
-            </button>
-            <ul class="dropdown-menu">
-                {% for cat in categoria %} 
-                    <li><a href="?id={{cat.pk}}" class="dropdown-item">{{cat.nombre}}</a></li>
-                {% endfor %}
-            </ul>
-
+            <!--Filtro por categoria-->
+            <div class="dropdown mt-2">
+                <button type="button" class="btn bg-orange2 text-white p-1" id="simpleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtrar por Categoría
+                </button>
+                <ul class="dropdown-menu">
+                    {% for cat in categoria %} 
+                        <li><a href="?id={{cat.pk}}" class="dropdown-item">{{cat.nombre}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-
-        <!-- Filtro por fecha -->
-        <div>
-            <label for="start">Filtrar por Fecha</label>
-            <input required type="date" id="start" name="fecha" min="2022-12-17" pattern="\d{4}-\d{2}-\d{2}">
-            <button>Filtrar</button>
-        </div>
-
-        <h3>LISTA DE PUBLICACIONES</h3>
-        <br><br>
-
-        <div>
-            {% for publi in publicaciones %}
-                <img src="{{publi.imagen.url}}" width="100" height="100">
-                <br><br>
-                <p><strong>TITULO: {{publi.titulo}}</strong></p>
-                <p><strong>FECHA: {{publi.fecha}}</strong></p>
-                <p><strong>CATEGORIA: {{publi.categoria_publicacion}}</strong></p>
-                <!--<p>CUERPO: {{publi.cuerpo}}</p>-->
-                <p><strong><a href="{% url 'publicaciones:detalle' publi.pk %}">IR A LA PUBLICACIÓN</strong></a></p>
-                <br><br>
-            {% endfor %}
-        </div>
-    </center>
-
-    <!-- Para la Paginacion -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if publicaciones.has_previous %}
-                <a href="?page=1">&laquo; Primera |</a>
-                <a href="?page={{ publicaciones.previous_page_number }}">Anterior</a>
-            {% endif %}
-    
-            <span class="current">
-                Pagina {{ publicaciones.number }} de {{ publicaciones.paginator.num_pages }}.
-            </span>
-    
-            {% if publicaciones.has_next %}
-                <a href="?page={{ publicaciones.next_page_number }}">Siguiente |</a>
-                <a href="?page={{ publicaciones.paginator.num_pages }}">Ultima &raquo;</a>
-            {% endif %}
-        </span>
     </div>
 
-    <br><br>
-    <hr size="5px" color="#FF5E14" />
+
+    <!-- Area de las Publicaciones -->
+<div class="container-sm ">
+    <section class="blog_area">
+            <div class="row">
+                <div class="">
+
+                    <div class="blog_left_sidebar">
+
+                        {% for publicacion in publicaciones %}
+                        <a id="link" href="{% url 'publicaciones:detalle' publicacion.pk %}" text-decoration: none>
+                            <article class="blog_item p-5">
+                                <div>
+                                    <img class="card-img w-60" src="{% static 'img/a.c4.jpg' %}" alt="">
+                                    <h4 class="text-secondary"> {{publicacion.categoria_publicacion}} </h4>
+                                    <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
+                                    <p> {{publicacion.cuerpo | slice:":250"}} </p>
+                                    <div id="Miniaturas" class="text-secondary">
+                                        <span title="Fecha Publicacion">
+                                            <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        </span>
+                                        <span title="Comentarios">
+                                            <img title="Comentarios" src="{% static 'img/chat-dots.svg' %}" alt="Comentarios">&nbsp;{{ publicacion.comentarios.all | length }} 
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+    </section>
+</div>
+
+
+    <!-- Para la Paginacion -->
+    <div class="container-sm px-5">
+        <nav aria-label="Pagina Navegacion">
+            <ul class="pagination">
+                <li class="page-item">
+                    {% if publicaciones.has_previous %}
+                        <a class="page-link" href="?page={{ publicaciones.previous_page_number }}" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span> 
+                        </a>
+                    {% endif %}
+                </li>
+                <li class="page-item"><a class="page-link" href="#">{{ publicaciones.number }} de {{ publicaciones.paginator.num_pages }}</a></li>
+                <li class="page-item">
+                    {% if publicaciones.has_next %}
+                        <a class="page-link" href="?page={{ publicaciones.next_page_number }}" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 {% endblock seccion %}

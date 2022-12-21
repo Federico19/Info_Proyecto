@@ -1,25 +1,37 @@
 {% extends "base.html" %}
+{% load static %}
 {% block tituloBarraNavegacion %} Recursos {% endblock %}
 
 {% block navbar %}
-  <a href="{% url 'home' %}" class="nav-item nav-link">Inicio</a>
-  <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
-  <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link">Publicaciones</a>
-  <a href="{% url 'recursos:listar' %}" class="nav-item nav-link active">Recursos</a>
-  <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+
 {% endblock %}
 
 {% block seccion %}  
-<h1>Recursos</h1>
-<br>
-  {% for recurso in recursos %}
-    <h2>{{ recurso.nombre }}</h2>
-    {{ recurso.archivo }}
-    
-    <form method="POST" action="{% url 'recursos:listar' %}">{% csrf_token %}
-			<input type="text" name="id_recurso" value="{{recurso.pk}}" hidden=""> 
-			<input type="submit" value="Descargar">
-		</form>
+  {% if recursos %}
+    <h2 class="container-sm text-orange px-5 py-2"> Recursos disponibles para descargar</h2>
+    {% for recurso in recursos %}
+    <ul class="list-group container-sm px-5 mt-2">
+    <div class=" "> 
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Nombre:  {{recurso.nombre}}&nbsp;&nbsp;|&nbsp;&nbsp;
+          Fecha Publicacion:  {{recurso.fecha.date}}
+          <form method="POST" action="{% url 'recursos:listar' %}">{% csrf_token %}
+            <input  type="text" name="id_recurso" value="{{recurso.pk}}" hidden=""> 
+            <input class="btn bg-orange2 text-white p-1" type="submit" value="Descargar">
+          </form>
+        </li>
+      </div>
 
-  {% endfor %}
+      </ul>
+    {% endfor %}
+  {% else %}
+  <h2 class="container-sm text-orange px-5 py-2"> Aun no hay recursos disponibles para descargar</h2>
+  {% endif %}
+
 {% endblock seccion %}

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 # Esta vista permite listar los recursos que estan en la BD, y tambien permite el poder descargarlos.
 def Listar_recursos(request):
-  recursos = Recurso.objects.all()
+  recursos = Recurso.objects.all().order_by('fecha')
 
   contexto = {
     'recursos' : recursos,

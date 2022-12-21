@@ -3,30 +3,65 @@
 {% block tituloBarraNavegacion %} Home {% endblock %}
 
 {% block navbar %}
-  <a href="{% url 'home' %}" class="nav-item nav-link active">Inicio</a>
-  <a href="{% url 'quienesSomos' %}" class="nav-item nav-link">Quienes Somos</a>
-  <a href="{% url 'publicaciones:listar_publicaciones' %}" class="nav-item nav-link">Publicaciones</a>
-  <a href="{% url 'recursos:listar' %}" class="nav-item nav-link">Recursos</a>
-  <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+
 {% endblock %}
 
 
-{% block seccion %}  
+{% block seccion %}
 
-  <hr size="5px" color="#FF5E14" />
-    <h1>Inicio</h1>
-  <hr size="5px" color="#FF5E14" />
+  <!-- Carrusel con las publicaciones mas recientes
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active ">
+        <img src="{% static 'img/a.c4.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la primera diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la primera diapositiva.</p>
+        </div>
+      </div>
+      <div class="carousel-item w-50">
+        <img src="{% static 'img/a.c5.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la segunda diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la segunda diapositiva.</p>
+        </div>
+      </div>
+      <div class="carousel-item w-50">
+        <img src="{% static 'img/a.c6.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la tercera diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la tercera diapositiva.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev w-50" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next w-50" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+  -->
 
-  <br><br>
-  <center>
-    <img src="static/img/Imagen4.gif">
-  </center>
-  <br><br>
+<div class="container-sm p-5">
 
   <section class="mapa">
 
     <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
-      <h3 class="titulo-principal text-center">ASOCIACIÓN CIVIL JUNTOS EN ACCIÓN</h3>
+      <h3 class="titulo-principal text-center text-orange ">ASOCIACIÓN CIVIL JUNTOS EN ACCIÓN</h3>
     </div>
 
   </section>
@@ -78,9 +113,10 @@
         <em>Valenzuela, Lisa y Duca, Silvia</em> y también una comisión Revisora de Cuentas compuesta por: 
         <em> Hernandez, Soledad y Secoff Alicia</em>. 
     </p>
-    <br>
-  <br><br>
-  <hr size="5px" color="#FF5E14" />
+
   </section>
-  
+</div>
 {% endblock %}
+
+
+
