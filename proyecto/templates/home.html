@@ -1,1 +1,128 @@
 {% extends "base.html" %}
+{% load static %}
+{% block tituloBarraNavegacion %} Home {% endblock %}
+
+{% block navbar %}
+
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+    
+{% endblock %}
+
+
+{% block seccion %}
+
+  <!-- Carrusel con las publicaciones mas recientes
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active ">
+        <img src="{% static 'img/a.c4.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la primera diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la primera diapositiva.</p>
+        </div>
+      </div>
+      <div class="carousel-item w-50">
+        <img src="{% static 'img/a.c5.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la segunda diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la segunda diapositiva.</p>
+        </div>
+      </div>
+      <div class="carousel-item w-50">
+        <img src="{% static 'img/a.c6.jpg' %}" class="d-block position-absolute top-50 start-50 translate-middle" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta de la tercera diapositiva</h5>
+          <p>Algún contenido placeholder representativo para la tercera diapositiva.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev w-50" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next w-50" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+  -->
+
+<div class="container-sm p-5">
+
+  <section class="mapa">
+
+    <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
+      <h3 class="titulo-principal text-center text-orange ">ASOCIACIÓN CIVIL JUNTOS EN ACCIÓN</h3>
+    </div>
+
+  </section>
+
+  <br><br>
+  <h3>Presentación de la Organización:</h3>
+  <br>
+  <section style="margin-left: 8%;"> 
+    <ul>
+      <br>
+
+      <h4>Objetivos:</h4>
+
+      <div style="margin-left: 40px;margin-right: 12%">
+        <br>
+        <li type="disc">Apoyo, contención y asesoramiento, propiciando el involucramiento de las familias y la sensibilización de la comunidad.</li>
+        <br>
+        <li type="disc">Creación de espacios priorizando actividades dentro de la recreación y capacitación laboral.</li>
+        <br>
+        <li type="disc">Capacitar y luego lograr la inserción laboral, entre otros fines (la asociación creo la UEGP N°143 Centro de Formación Integral para Personas con Discapacidad para alcanzar las metas planteadas, se viene trabajando a través de ella hace 10 años y se continúa).</li>
+        <br>
+      </div>
+
+      <h4>Metas:</h4>
+
+      <div style="margin-left: 40px;margin-right: 12%">
+        <br>
+        <li type="disc">Promover en la persona con discapacidad habilidades, hábitos y actitudes, desarrollando al máximo su potencialidad, para lograr su inserción socio-laboral.</li>
+        <br>
+        <li type="disc">Alcanzar la formación socio-laboral de la persona con discapacidad a través de distintos cursos y talleres, trabajando articuladamente U.E.P., familia y comunidad.</li>
+        <br>
+      </div>
+    </ul>
+  </section>
+
+  <section>
+    <br><br>
+  <center>
+    <h4>Logro Principal</h4>
+  </center>
+  <p>Durante el año 2008 la Asociación gestionó y consiguió la habilitación, a partir del 02 de marzo de 2009, de la UEGP Nº 143 CENTRO DE FORMACION INTEGRAL.
+    <center>
+        <img src="{% static 'img/UEP N°143.jpg' %}"width= "300px" height="300px"> <img src="static/img/Imagen3.jpg">
+    </center>
+    <br>
+    <p> La institución está dirigida y administrada por una Comisión Directiva compuesta de un presidente: 
+        <em>Silva,Sandra</em>, un tesorero: 
+        <em>Zarco,Gisela</em>, vocales: 
+        <em>Valenzuela, Lisa y Duca, Silvia</em> y también una comisión Revisora de Cuentas compuesta por: 
+        <em> Hernandez, Soledad y Secoff Alicia</em>. 
+    </p>
+
+  </section>
+</div>
+{% endblock %}
+
+
+

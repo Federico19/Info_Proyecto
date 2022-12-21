@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block tituloBarraNavegacion %} Registro {% endblock %}
+
+{% block navbar %}
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link active" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+{% endblock %}
+
+{% block seccion %}
+<div class="half mt-5 my-0 py-o">
+  <div class="contents">
+
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="form-block">
+
+            <form method="POST">{%csrf_token%}
+              <h5 class=" my-3 mt-5">INGRESE SUS DATOS PARA REGISTRARSE</h5>
+              {{form.as_p}}
+              <button class="btn btn-block text-white bg-orange2" value="submit">Enviar</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+
+
+  
+
+{% endblock seccion %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block tituloBarraNavegacion %} Detalle de Publicación {% endblock %}
+
+{% block navbar %}
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+    
+{% endblock %}
+
+
+{% block seccion %}  
+
+<!-- Detalle de la Publicacion-->
+<div class="container-sm px-5">           
+    <article class="blog_item p-5">
+        <div>
+            <h4 class="text-secondary"> {{publicacion.categoria_publicacion}} </h4>
+            <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
+            <div id="Miniaturas" class="text-secondary">
+                <span title="Fecha Publicacion">
+                    <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }}
+                </span>
+            </div>
+            <img class="card-img w-60 my-2" src="{% static 'img/a.c4.jpg' %}" alt="">
+            <p> {{publicacion.cuerpo}} </p>
+        </div>
+    </article>
+</div>
+
+
+<!-- Comentarios de la Publicacion-->
+<div class="container-sm px-5">
+    <h3 class="text-orange container-sm px-5">Comentarios</h3>
+
+    {% if not publicacion.comentarios.all %}
+        Todavia no hay comentarios... 
+    {% endif %}
+
+    <!-- Permite agregar comentarios si esta logueado-->
+    <form method="POST" action="{% url 'publicaciones:comentar' %}">{% csrf_token %}
+        <div class="form-group container-sm px-5">
+            <textarea class="form-control" name="comentario" rows="3"></textarea>
+        </div>
+        <input type="text" name="id_publicacion" value="{{publicacion.pk}}" hidden="">
+
+        <div class="container-sm px-5">
+            {% if user.is_authenticated %}
+                <input class="btn btn-primary" type="submit" value="Comentar">
+            {% else %}
+                <a href="{% url 'login' %}" class="btn bg-orange2 text-white my-2">Loguerse para Comentar</a>
+            {% endif%}
+        </div>
+    </form>
+
+    <!-- Lista todos los comentarios, ordenados por fecha-->
+    <div class="container-sm px-5"> 
+        {% if publicacion.comentarios.all %}
+            {% for comentario in publicacion.comentarios.all %}
+                <strong>
+                    <p>
+                        {{ comentario.nombre }} -
+                        {{ comentario.fecha }}
+                    </p>
+                </strong>
+                {{ comentario.cuerpo }}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="container-sm px-5">
+        <a type="button" href="{% url 'publicaciones:listar_publicaciones' %}" class=" text-orange my-5"> Atras</a>
+    </div>
+</div>
+{% endblock seccion %}

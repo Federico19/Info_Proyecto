@@ -1,10 +1,112 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% block tituloBarraNavegacion %} Publicaciones {% endblock %}
 
+{% block navbar %}
+
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home' %}"><h5>Inicio</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'quienesSomos' %}"><h5>Quienes Somos</h5></a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+    
+{% endblock %}
+
+
 {% block seccion %}  
-  <br>
-  <br>
-  <h1>Desarrollo seccion: <br> Publicaciones</h1>
-  <br>
-  <br>
-  {% endblock %}
+    <!-- Filtros -->
+    <div id="Filtros" class="container-sm px-5">
+        <div class="row my-3 ">
+            <!-- Filtro por fecha -->
+            <div>
+                <form method="GET" action="{% url 'publicaciones:listar_publicaciones' %}">{% csrf_token %}
+                    <button class="btn bg-orange2 text-white p-1" value="submit">Filtrar por Fecha</button>
+                    <input required value="submit" type="date" name="fecha" min="2022-12-14" pattern="\d{4}-\d{2}-\d{2}">    
+                </form>
+            </div>
+
+            <!--Filtro por categoria-->
+            <div class="dropdown mt-2">
+                <button type="button" class="btn bg-orange2 text-white p-1" id="simpleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtrar por Categoría
+                </button>
+                <ul class="dropdown-menu">
+                    {% for cat in categoria %} 
+                        <li><a href="?id={{cat.pk}}" class="dropdown-item">{{cat.nombre}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Area de las Publicaciones -->
+<div class="container-sm ">
+    <section class="blog_area">
+            <div class="row">
+                <div class="">
+
+                    <div class="blog_left_sidebar">
+                        {% if publicaciones %}
+                            {% for publicacion in publicaciones %}
+                            <a id="link" href="{% url 'publicaciones:detalle' publicacion.pk %}" text-decoration: none>
+                                <article class="blog_item p-5">
+                                    <div>
+                                        <img class="card-img w-60" src="{% static 'img/a.c4.jpg' %}" alt="">
+                                        <h4 class="text-secondary"> {{publicacion.categoria_publicacion}} </h4>
+                                        <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
+                                        <p> {{publicacion.cuerpo | slice:":250"}} </p>
+                                        <div id="Miniaturas" class="text-secondary">
+                                            <span title="Fecha Publicacion">
+                                                <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                            </span>
+                                            <span title="Comentarios">
+                                                <img title="Comentarios" src="{% static 'img/chat-dots.svg' %}" alt="Comentarios">&nbsp;{{ publicacion.comentarios.all | length }} 
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <h2 class="container-sm text-orange px-4 py-3"> No hay publicaciones por mostrar.</h2>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+    </section>
+</div>
+
+
+    <!-- Para la Paginacion -->
+    <div class="container-sm px-5">
+        <nav aria-label="Pagina Navegacion">
+            <ul class="pagination">
+                <li class="page-item">
+                    {% if publicaciones.has_previous %}
+                        <a class="page-link" href="?page={{ publicaciones.previous_page_number }}" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span> 
+                        </a>
+                    {% endif %}
+                </li>
+                <li class="page-item"><a class="page-link" href="#">{{ publicaciones.number }} de {{ publicaciones.paginator.num_pages }}</a></li>
+                <li class="page-item">
+                    {% if publicaciones.has_next %}
+                        <a class="page-link" href="?page={{ publicaciones.next_page_number }}" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock seccion %}
