@@ -8,11 +8,8 @@ ALLOWED_HOSTS = ['FedeOcampo.pythonanywhere.com']
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-	'default' : {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'FedeOcampo$dbsql_1',
-		'USER': 'FedeOcampo',
-		'PASSWORD': '2y2son4!',
-		'HOST': 'FedeOcampo.mysql.pythonanywhere-services.com',
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
