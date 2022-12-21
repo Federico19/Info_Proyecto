@@ -9,7 +9,13 @@
     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
-
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+    
 {% endblock %}
 
 
@@ -47,27 +53,30 @@
                 <div class="">
 
                     <div class="blog_left_sidebar">
-
-                        {% for publicacion in publicaciones %}
-                        <a id="link" href="{% url 'publicaciones:detalle' publicacion.pk %}" text-decoration: none>
-                            <article class="blog_item p-5">
-                                <div>
-                                    <img class="card-img w-60" src="{% static 'img/a.c4.jpg' %}" alt="">
-                                    <h4 class="text-secondary"> {{publicacion.categoria_publicacion}} </h4>
-                                    <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
-                                    <p> {{publicacion.cuerpo | slice:":250"}} </p>
-                                    <div id="Miniaturas" class="text-secondary">
-                                        <span title="Fecha Publicacion">
-                                            <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }} &nbsp;&nbsp;|&nbsp;&nbsp;
-                                        </span>
-                                        <span title="Comentarios">
-                                            <img title="Comentarios" src="{% static 'img/chat-dots.svg' %}" alt="Comentarios">&nbsp;{{ publicacion.comentarios.all | length }} 
-                                        </span>
+                        {% if publicaciones %}
+                            {% for publicacion in publicaciones %}
+                            <a id="link" href="{% url 'publicaciones:detalle' publicacion.pk %}" text-decoration: none>
+                                <article class="blog_item p-5">
+                                    <div>
+                                        <img class="card-img w-60" src="{% static 'img/a.c4.jpg' %}" alt="">
+                                        <h4 class="text-secondary"> {{publicacion.categoria_publicacion}} </h4>
+                                        <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
+                                        <p> {{publicacion.cuerpo | slice:":250"}} </p>
+                                        <div id="Miniaturas" class="text-secondary">
+                                            <span title="Fecha Publicacion">
+                                                <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                            </span>
+                                            <span title="Comentarios">
+                                                <img title="Comentarios" src="{% static 'img/chat-dots.svg' %}" alt="Comentarios">&nbsp;{{ publicacion.comentarios.all | length }} 
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        </a>
-                        {% endfor %}
+                                </article>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <h2 class="container-sm text-orange px-4 py-3"> No hay publicaciones por mostrar.</h2>
+                        {% endif %}
 
                     </div>
 

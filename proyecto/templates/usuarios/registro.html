@@ -8,32 +8,41 @@
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
-
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link active" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
 {% endblock %}
 
 {% block seccion %}
+<div class="half mt-5 my-0 py-o">
+  <div class="contents">
 
-  <hr size="5px" color="#FF5E14" />
-    <h1>Registro</h1>
-  <hr size="5px" color="#FF5E14" />
-  <br><br>
-  <main role="main">
     <div class="container">
-      <div class="row mt-3">
-        <div class="col-md-9 mx-auto mb-5">
-          <form action="" method="post">{% csrf_token %}         
-            <div style="margin-left : 15%;margin-right: 15%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"">
-              <h3 class="titulo-principal text-center">INGRESE SUS DATOS PARA REGISTRARSE</h3>
-            </div>
-            <br><br>
-            {{form.as_p}}
-            <p><input type="submit" class="btn btn-primary btn-block" value="ENVIAR"></p>
-          </form>
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="form-block">
+
+            <form method="POST">{%csrf_token%}
+              <h5 class=" my-3 mt-5">INGRESE SUS DATOS PARA REGISTRARSE</h5>
+              {{form.as_p}}
+              <button class="btn btn-block text-white bg-orange2" value="submit">Enviar</button>
+
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </main>
-  <br><br>
-  <hr size="5px" color="#FF5E14" />
+  </div>
+
+  
+</div>
+
+
+
+
+  
 
 {% endblock seccion %}

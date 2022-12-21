@@ -9,39 +9,45 @@
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'publicaciones:listar_publicaciones' %}"><h5>Publicaciones</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'recursos:listar' %}"><h5>Recursos</h5></a></li>
     <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'contacto' %}"><h5>Contacto</h5></a></li>
-
+    {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link" aria-current="page"><h5>Salir</h5></a></li>
+    {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link" aria-current="page"><h5>Ingresar</h5></a></li>
+      <li class="nav-item"><a href="{% url 'usuarios:registro' %}" class="nav-link" aria-current="page"><h5>Registrarse</h5></a></li>
+    {% endif %}
+    
 {% endblock %}
 
 {% block seccion %}
   <div class="container-sm p-5">
     <br>
-      <center><h3>La escucha, la cercanía y el conocimiento son claves para el desarrollo. </h3>
-      
-      <p><strong>JUNTOS EN ACCION</strong> es una Asociación Civil sin fines de lucro formada por ciudadanos, que surge en el año 2003  ante la necesidad de contar con un servicio  que capacite a los jóvenes con capacidades diferentes en un oficio o puesto de trabajo desarrollando sus potencialidades, obteniendo así una herramienta que les amplíe las posibilidades de inserción laboral y social.</p>
-      <br>
-      <h2><center><b><u><font color="green">Misión y Visión</font></u></b></center></h2>
-      <p><ul>  La Asociación Civil Juntos En Acción se caracteriza por un modelo de trabajo a largo plazo. Solo así es posible construir un futuro sostenible, generando acciones para mejorar la calidad de vida de las personas con capacidades diferentes titulares de los mismos derechos fundamentales que el resto de los ciudadanos y promover su inserción socio-laboral. Creemos en una concepción donde las personas con capacidades diferentes poseen facultad para decidir sobre sus propias vidas, mientras su discapacidad no impida esto. Ellos reclaman igualdad de oportunidades y es nuestro deber ayudarlos a lograrlo. <p></ul></center>
-      <br>
-      <br>
-      <h2><center><b><u><font color="green">Caracterización de la Institución</font></u></b></center></h2>
-      <p>
-          <li>Como institución nos proponemos a atender a la educación de alumnos que presenta alguna discapacidad, priorizando su formación integral, y promoviendo en ellos competencias para su futura inserción y desempeño.</li>
-          <li>La UEPG N 143 "Centro de Formación Integral" ubica en el centro de su actividad institucional la preparación integral del joven, potenciando y favoreciendo al máximo sus capacidades, para que se desarrollen en las distintas áreas o dimensiones educativa, laboral, social y familiar.
-          Permitiéndole ser parte de la comunidad de forma útil y significativa.</li>
-          <li>Está orientada a la capacitación laboral mediante la aplicación de talleres, cursos y prácticas laborales con apoyo (ECA, empleo con apoyo), teniendo como base la integración.</li>
-      </p>
-      <br>
-      <br>
-      <h2><center><b><u><font color="green">Valores que Sostenemos</font></u></b></center></h2>
-      <p>
-        <center>Como institución educativa, estamos alineados con los valores y principios que actualmente sostienen y promueven distintas normativas internacionales, nacionales y/o provinciales. Entre ellos mencionamos:</center>
-          <ul><b><font color="blue">La educación:</font></b> Desarrollar y fortalecer la formación integral de las personas a lo largo de toda la vida.</ul>
-          <ul><b><font color="blue">Vida independiente:</font></b> La posibilidad de que la persona con capacidades diferentes se encuentre en condición de ejercer actos de manera autónoma.</ul>
-          <ul><b><font color="blue">Igualdad de Oportunidades:</font></b> La ausencia de discriminación directa o indirecta que tenga su causa para participar plenamente en la vida política, económica, cultural y social.</ul>
-          <ul><b><font color="blue">Equiparación de Oportunidades:</font></b> Es todo proceso de ajuste del entorno, los servicios, las actividades, la información y la documentación.</ul>
-          <ul><b><font color="blue">Intersectorialidad:</font></b> En consideración de las necesidades y demandas de personas con capacidades diferentes, tendientes a la equiparación de oportunidades y trato igualitario.</ul>
-          <ul>La educación brindará las oportunidades y posibilidades necesarias para desarrollar y fortalecer la formación integral, basado en los valores de libertad, paz, solidaridad, cooperación, igualdad, respeto a la diversidad, justicia, responsabilidad y bien común.</ul>
-          <ul>La formación que estimule la creatividad y la comprensión de las distintas manifestaciones del arte y la cultura.</ul>
-      </p>
+    <center><h3>La escucha, la cercanía y el conocimiento son claves para el desarrollo. </h3>
+    
+    <p><strong>JUNTOS EN ACCION</strong> es una Asociación Civil sin fines de lucro formada por ciudadanos, que surge en el año 2003  ante la necesidad de contar con un servicio  que capacite a los jóvenes con capacidades diferentes en un oficio o puesto de trabajo desarrollando sus potencialidades, obteniendo así una herramienta que les amplíe las posibilidades de inserción laboral y social.</p>
+    <br>
+    <h2><center><b><u><font color="blue">Misión y Visión</font></u></b></center></h2>
+    <p><ul>  La Asociación Civil Juntos En Acción se caracteriza por un modelo de trabajo a largo plazo. Solo así es posible construir un futuro sostenible, generando acciones para mejorar la calidad de vida de las personas con capacidades diferentes titulares de los mismos derechos fundamentales que el resto de los ciudadanos y promover su inserción socio-laboral. Creemos en una concepción donde las personas con capacidades diferentes poseen facultad para decidir sobre sus propias vidas, mientras su discapacidad no impida esto. Ellos reclaman igualdad de oportunidades y es nuestro deber ayudarlos a lograrlo. <p></ul></center>
+    <br>
+    <br>
+    <h2><center><b><u><font color="blue">Caracterización de la Institución</font></u></b></center></h2>
+    <p>
+        <li>Como institución nos proponemos a atender a la educación de alumnos que presenta alguna discapacidad, priorizando su formación integral, y promoviendo en ellos competencias para su futura inserción y desempeño.</li>
+        <li>La UEPG N 143 "Centro de Formación Integral" ubica en el centro de su actividad institucional la preparación integral del joven, potenciando y favoreciendo al máximo sus capacidades, para que se desarrollen en las distintas áreas o dimensiones educativa, laboral, social y familiar.
+        Permitiéndole ser parte de la comunidad de forma útil y significativa.</li>
+        <li>Está orientada a la capacitación laboral mediante la aplicación de talleres, cursos y prácticas laborales con apoyo (ECA, empleo con apoyo), teniendo como base la integración.</li>
+    </p>
+    <br>
+    <br>
+    <h2><center><b><u><font color="blue">Valores que Sostenemos</font></u></b></center></h2>
+    <p>
+      <center>Como institución educativa, estamos alineados con los valores y principios que actualmente sostienen y promueven distintas normativas internacionales, nacionales y/o provinciales. Entre ellos mencionamos:</center>
+        <ul><b><font color="orange">La educación:</font></b> Desarrollar y fortalecer la formación integral de las personas a lo largo de toda la vida.</ul>
+        <ul><b><font color="orange">Vida independiente:</font></b> La posibilidad de que la persona con capacidades diferentes se encuentre en condición de ejercer actos de manera autónoma.</ul>
+        <ul><b><font color="orange">Igualdad de Oportunidades:</font></b> La ausencia de discriminación directa o indirecta que tenga su causa para participar plenamente en la vida política, económica, cultural y social.</ul>
+        <ul><b><font color="orange">Equiparación de Oportunidades:</font></b> Es todo proceso de ajuste del entorno, los servicios, las actividades, la información y la documentación.</ul>
+        <ul><b><font color="orange">Intersectorialidad:</font></b> En consideración de las necesidades y demandas de personas con capacidades diferentes, tendientes a la equiparación de oportunidades y trato igualitario.</ul>
+        <ul>La educación brindará las oportunidades y posibilidades necesarias para desarrollar y fortalecer la formación integral, basado en los valores de libertad, paz, solidaridad, cooperación, igualdad, respeto a la diversidad, justicia, responsabilidad y bien común.</ul>
+        <ul>La formación que estimule la creatividad y la comprensión de las distintas manifestaciones del arte y la cultura.</ul>
+    </p>
     </div>
 {% endblock %}
