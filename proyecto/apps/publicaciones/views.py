@@ -37,7 +37,7 @@ def Listar_Publicaciones(request):
 
 
     #Define los elementos para la paginacion
-    paginator = Paginator(publicaciones, 2)
+    paginator = Paginator(publicaciones, 4)
     pagina = request.GET.get('page')
     publicaciones = paginator.get_page(pagina)
 
