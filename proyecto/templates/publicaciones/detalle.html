@@ -29,7 +29,7 @@
             <h2 class="text-primary"> {{ publicacion.titulo }} </h2>
             <div id="Miniaturas" class="text-secondary">
                 <span title="Fecha Publicacion">
-                    <img title="Fecha Publicacion" src="{% static 'img/calendar-date.svg' %}" alt="Fecha Publicacion"> {{ publicacion.fecha }}
+                    <img title="Fecha Publicacion" src="{{ publicacion.imagen.url }}" alt="Fecha Publicacion"> {{ publicacion.fecha }}
                 </span>
             </div>
             <img class="card-img w-60 my-2" src="{% static 'img/a.c4.jpg' %}" alt="">
@@ -41,11 +41,13 @@
 
 <!-- Comentarios de la Publicacion-->
 <div class="container-sm px-5">
-    <h3 class="text-orange container-sm px-5">Comentarios</h3>
+    <div class="container-sm px-5">
+        <h3 class="text-orange">Comentarios</h3>
 
-    {% if not publicacion.comentarios.all %}
-        Todavia no hay comentarios... 
-    {% endif %}
+        {% if not publicacion.comentarios.all %}
+            Todavia no hay comentarios... 
+        {% endif %}
+    </div>
 
     <!-- Permite agregar comentarios si esta logueado-->
     <form method="POST" action="{% url 'publicaciones:comentar' %}">{% csrf_token %}
@@ -56,24 +58,31 @@
 
         <div class="container-sm px-5">
             {% if user.is_authenticated %}
-                <input class="btn btn-primary" type="submit" value="Comentar">
+                <input class="btn btn-primary mt-2" type="submit" value="Comentar">
             {% else %}
                 <a href="{% url 'login' %}" class="btn bg-orange2 text-white my-2">Loguerse para Comentar</a>
             {% endif%}
         </div>
     </form>
-
     <!-- Lista todos los comentarios, ordenados por fecha-->
-    <div class="container-sm px-5"> 
+    <div class="container-sm px-5 mt-4"> 
+        <hr>
         {% if publicacion.comentarios.all %}
             {% for comentario in publicacion.comentarios.all %}
-                <strong>
-                    <p>
-                        {{ comentario.nombre }} -
-                        {{ comentario.fecha }}
-                    </p>
-                </strong>
-                {{ comentario.cuerpo }}
+                <div class="mb-4">
+                    <strong>
+                        <p>
+                            <strong>
+                                <b>
+                                {{ comentario.nombre }}&nbsp;&nbsp;|&nbsp;&nbsp;
+                                {{ comentario.fecha }}
+                                </b>
+                            </strong>
+                        </p>
+                    </strong>
+                    {{ comentario.cuerpo }}
+                    <hr>
+                </div>
             {% endfor %}
         {% endif %}
     </div>
